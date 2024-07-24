@@ -187,4 +187,32 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('equals').addEventListener('click', () => {
         solve();
     });
+
+    // Handle keyboard events
+    window.addEventListener('keydown', event => {
+        const num = event.code.slice(-1);
+        const code = event.code;
+    
+        if ((code.includes('Digit') || code.includes('Numpad')) && !event.shiftKey) {
+            displayNumber(num);
+        } else if (code === 'Period') {
+            displayDecimal(".");
+        } else if (event.shiftKey && code === 'Equal') {
+            getOperator("add");
+        } else if (code === 'Enter') {
+            solve();
+        } else if (code === 'Minus') {
+            getOperator("subtract");
+        } else if (event.shiftKey && code === 'Digit8') {
+            getOperator("multiply");
+        } else if (code === 'Slash') {
+            getOperator("divide");
+        } else if (code === 'Backspace') {
+            screen.textContent = screen.textContent.slice(0,-1);
+        } else if (code === 'KeyC') {
+            clearResult();
+        } else {
+            console.log('Invalid keystroke');
+        }
+      });
 });
