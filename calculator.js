@@ -3,10 +3,12 @@ const MAX_LENGTH = 9;
 let firstDigit = true;
 let hasDecimal = false;
 let screen = document.getElementById("result");
+let firstNum = 0;
+let secondNum = 0;
+let operator = "";
 
 // Functions to display to the screen
 function displayNumber(num) {
-    // console.log("Number to display on screen: ", num);
     if (firstDigit) {
         screen.textContent = num;
         firstDigit = false;
@@ -38,12 +40,74 @@ function displayDecimal() {
     }
 }
 
+// Functions to get the value from the screen
+function getNum(num) {
+    if (parseFloat(num) % 1 === 0) {
+        return parseInt(num);
+    } else {
+        return parseFloat(num);
+    }
+}
+
 // Functions for calculator operations
 function clearResult() {
     screen.textContent = "0";
     firstDigit = true;
     hasDecimal = false;
 }
+
+function getOperator(operatorId) {
+    firstNum = getNum(screen.textContent);
+    
+    switch (operatorId) {
+        case "add":
+            operator = "+";
+            break;
+        case "subtract":
+            operator = "-";
+            break;
+        case "multiply":
+            operator = "*";
+            break;
+        case "divide":
+            operator = "/";
+            break;
+    }
+    
+    firstDigit = true;
+    hasDecimal = false;
+}
+
+function solve() {
+    secondNum = getNum(screen.textContent);
+    
+    console.log("First num: ", firstNum);
+    console.log("Operator: ", operator);
+    console.log("Second num: ", secondNum);
+    
+    switch (operator) {
+      case "+":
+        solution = firstNum + secondNum;
+        break;
+      case "-":
+        solution = firstNum - secondNum;
+        break;
+      case "*":
+        solution = firstNum * secondNum;
+        break;
+      case "/":
+        solution = firstNum / secondNum;
+        break;
+    }
+    
+    console.log("Solution: ", solution);
+    screen.textContent = solution;
+
+    // Reset the firstNum to the solution in case user clicks operator immediately
+    firstNum = solution;
+    firstDigit = true;
+    hasDecimal = false;
+  }
 
 // Calculator Events
 window.addEventListener('DOMContentLoaded', () => {  
@@ -61,5 +125,17 @@ window.addEventListener('DOMContentLoaded', () => {
     // Clear the screen
     document.getElementById('clear').addEventListener('click', () => {
         clearResult();
+    });
+
+    // Handle operator button clicks
+    document.querySelectorAll('.operator').forEach(operator => {
+        operator.addEventListener('click', () => {
+            getOperator(operator.id);
+        });
+    });
+
+    // Handle click for equals button
+    document.getElementById('equals').addEventListener('click', () => {
+        solve();
     });
 });
