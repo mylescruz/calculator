@@ -40,13 +40,31 @@ function displayDecimal() {
     }
 }
 
-// Functions to get the value from the screen
 function getNum(num) {
     if (parseFloat(num) % 1 === 0) {
         return parseInt(num);
     } else {
         return parseFloat(num);
     }
+}
+
+// Functions to resolve edge cases
+function parseDecimal(value) {
+    // Keep decimal answer within defined max length
+    const quotientLength = Math.trunc(value).toString().length;
+    let solution = value.toFixed(MAX_LENGTH-quotientLength);
+  
+    // Remove trailing zeros
+    let solText = solution.toString();
+    let solLength = solText.length;
+    if (solText[solLength-1] === "0") {
+        while(solText[solLength-1] === "0") {
+            solText.slice(0,-1); 
+            solLength -= 1;
+        }
+    }
+    
+    return parseFloat(solText);
 }
 
 // Functions for calculator operations
@@ -101,13 +119,19 @@ function solve() {
     }
     
     console.log("Solution: ", solution);
+
+    // Handle decimal solutions
+    if (solution % 1 !== 0) {
+        solution = parseDecimal(solution);
+    }
+
     screen.textContent = solution;
 
     // Reset the firstNum to the solution in case user clicks operator immediately
     firstNum = solution;
     firstDigit = true;
     hasDecimal = false;
-  }
+}
 
 // Calculator Events
 window.addEventListener('DOMContentLoaded', () => {  
