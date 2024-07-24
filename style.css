@@ -61,6 +61,11 @@ body {
 	text-align: center;
 }
 
+.digit:hover {
+	background-color:white;
+	color:black;
+}  
+
 .options {
 	height:30px;
 	width:30px;
@@ -90,4 +95,9 @@ body {
 	text-align:center;
 	box-shadow: 1px 1px 1px black;
 	cursor: pointer;
+}
+
+.options:hover, .operator:hover {
+	background-color:white;
+	color:black;
 }
