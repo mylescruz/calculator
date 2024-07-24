@@ -2,10 +2,12 @@
 const MAX_LENGTH = 9;
 let firstDigit = true;
 let hasDecimal = false;
+let isScientific = false;
 let screen = document.getElementById("result");
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
+let scientificValue = 0;
 
 // Functions to display to the screen
 function displayNumber(num) {
@@ -49,22 +51,33 @@ function getNum(num) {
 }
 
 // Functions to resolve edge cases
-function parseDecimal(value) {
+function parseDecimal(solution) {
     // Keep decimal answer within defined max length
-    const quotientLength = Math.trunc(value).toString().length;
-    let solution = value.toFixed(MAX_LENGTH-quotientLength);
+    const quotientLength = Math.trunc(solution).toString().length;
+
+    if (quotientLength <= MAX_LENGTH) {
+        solution = solution.toFixed(MAX_LENGTH-quotientLength);
+    }
   
-    // Remove trailing zeros
     let solText = solution.toString();
     let solLength = solText.length;
-    if (solText[solLength-1] === "0") {
+
+    // Check if solution has decimals and should be in scientific notation
+    if (quotientLength > MAX_LENGTH) {
+        isScientific = true;
+        scientificValue = solution;
+        solText = solText[0] + '.' + solText.slice(1,MAX_LENGTH-3) +'e'+(quotientLength-1).toString();
+    }
+
+    // Remove trailing zeros
+    if (solText[solLength-1] === "0" && !isScientific) {
         while(solText[solLength-1] === "0") {
-            solText.slice(0,-1); 
+            solText = solText.slice(0,-1); 
             solLength -= 1;
         }
     }
     
-    return parseFloat(solText);
+    return solText;
 }
 
 // Functions for calculator operations
@@ -75,7 +88,11 @@ function clearResult() {
 }
 
 function getOperator(operatorId) {
-    firstNum = getNum(screen.textContent);
+    if (isScientific && firstDigit) {
+        firstNum = scientificValue;
+    } else {
+        firstNum = getNum(screen.textContent);
+    }
     
     switch (operatorId) {
         case "add":
@@ -120,12 +137,20 @@ function solve() {
     
     console.log("Solution: ", solution);
 
-    // Handle decimal solutions
     if (solution % 1 !== 0) {
-        solution = parseDecimal(solution);
-    }
+        // Handle solutions with decimals
+        screen.textContent = parseDecimal(solution);
 
-    screen.textContent = solution;
+    } else if (solution.toString().length > MAX_LENGTH) {
+        // Handle solutions with values larger than the max length
+        isScientific = true;
+        const solText = solution.toString();
+        scientificValue = solution;
+        screen.textContent = solText[0] + '.' + solText.slice(1,MAX_LENGTH-3) +'e'+(solText.length-1).toString();
+
+    } else {
+        screen.textContent = solution;
+    }
 
     // Reset the firstNum to the solution in case user clicks operator immediately
     firstNum = solution;
