@@ -2,3 +2,92 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
+body {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+}
+
+.calculator {
+	display:flex;
+	flex-direction:column;
+	max-width:175px;
+	background-color: rgb(222, 218, 217);
+	border:solid black;
+	border-color:black;
+	border-radius: 5%;
+	padding:10px;
+	box-shadow: 5px 5px 5px black;
+}
+
+.screen {
+	background-color:black;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	height:50px;
+	padding:10px;
+	margin:5px 0px;
+	color: white;
+	font-size: 25px;
+	border-radius: 5%;
+	font-family:system-ui;
+}
+
+.buttons {
+	display:flex;
+	flex:rows;
+}
+  
+.digits {
+	display:flex;
+	flex:initial;
+	flex-direction:row;
+	flex-wrap:wrap;
+}
+  
+.digit {
+	height:30px;
+	width:30px;
+	color:black;
+	border-radius: 25%;
+	background-color:rgb(222, 218, 217);
+	margin:4px;
+	font-family:system-ui;
+	font-size:20px;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+	text-align: center;
+}
+
+.options {
+	height:30px;
+	width:30px;
+	border-radius: 25%;
+	color:white;
+	background-color:#132;
+	margin:5px 0px 5px 5px;
+	font-family:serif;
+	font-size:20px;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+}
+
+.operators {
+	margin-left: 10px;
+}
+  
+.operator {
+	height:30px;
+	width:30px;
+	border-radius: 25%;
+	color:white;
+	background-color:orange;
+	margin:2px;
+	font-family:system-ui;
+	font-size:20px;
+	text-align:center;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+}
