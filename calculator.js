@@ -38,6 +38,13 @@ function displayDecimal() {
     }
 }
 
+// Functions for calculator operations
+function clearResult() {
+    screen.textContent = "0";
+    firstDigit = true;
+    hasDecimal = false;
+}
+
 // Calculator Events
 window.addEventListener('DOMContentLoaded', () => {  
     // Add number to screen when clicked
@@ -49,5 +56,10 @@ window.addEventListener('DOMContentLoaded', () => {
             displayNumber(digit.textContent);
             }
         });
+    });
+
+    // Clear the screen
+    document.getElementById('clear').addEventListener('click', () => {
+        clearResult();
     });
 });
