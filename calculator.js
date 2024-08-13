@@ -140,16 +140,16 @@ function solve() {
     if (solution % 1 !== 0) {
         // Handle solutions with decimals
         screen.textContent = parseDecimal(solution);
-
+        isScientific = false;
     } else if (solution.toString().length > MAX_LENGTH) {
         // Handle solutions with values larger than the max length
         isScientific = true;
         const solText = solution.toString();
         scientificValue = solution;
         screen.textContent = solText[0] + '.' + solText.slice(1,MAX_LENGTH-3) +'e'+(solText.length-1).toString();
-
     } else {
         screen.textContent = solution;
+        isScientific = false;
     }
 
     // Reset the firstNum to the solution in case user clicks operator immediately
