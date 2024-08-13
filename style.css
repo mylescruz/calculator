@@ -3,20 +3,132 @@ html, body {
 	padding: 0;
 }
 
+* {
+	touch-action: manipulation;
+}
+
 body {
 	display: flex;
 	justify-content: center;
-	margin-top: 25px;
+	background-color: rgb(222, 218, 217);
 }
 
 .calculator {
 	display:flex;
 	flex-direction:column;
-	max-width:180px;
+	width: 100%;
+	margin: 50px 30px;
+}
+
+.screen {
+	background-color:black;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	height: 150px;
+	padding: 5px 10px;
+	margin: 5px 0px 10px;
+	color: white;
+	font-size: 45px;
+	border-radius: 25px;
+	font-family:system-ui;
+}
+
+.buttons {
+	margin: 4em 0em;
+}
+  
+.digits {
+	float: left;
+	display:flex;
+	flex-wrap: wrap;
+	width: 75%;
+}
+  
+.digit {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	margin: 30px 8px;
+	padding: 0;
+	font-size: 2em;
+	color:black;
+	background-color:rgb(222, 218, 217);
+	font-family:system-ui;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+	text-align: center;
+}
+
+.digit:hover {
+	background-color:white;
+	color:black;
+}  
+
+.options {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	margin: 30px 8px;
+	padding: 0;
+	font-size: 2em;
+	color:white;
+	background-color:#132;
+	font-family:serif;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+}
+
+.operators {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	float: right;
+	width: 25%;
+}
+  
+.operator, #equals {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	margin: 15px 0px;
+	padding: 0;
+	font-size: 2em;
+	color:white;
+	background-color:orange;
+	font-family:system-ui;
+	text-align:center;
+	box-shadow: 1px 1px 1px black;
+	cursor: pointer;
+}
+
+#add {
+	margin-top: 30px;	
+}
+
+.options:hover, .operator:hover {
+	background-color:white;
+	color:black;
+}
+
+@media screen and (min-width: 768px) {
+body {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+	background-color: white;
+}
+
+.calculator {
+	display:flex;
+	flex-direction:column;
+	width: 180px;
+	height: 275px;
 	background-color: rgb(222, 218, 217);
 	border:solid black;
 	border-color:black;
-	border-radius: 5%;
+	border-radius: 25px;
 	padding:10px;
 	box-shadow: 5px 5px 5px black;
 }
@@ -26,39 +138,39 @@ body {
 	display: flex;
 	justify-content: right;
 	align-items: center;
-	height:50px;
-	padding:10px;
-	margin:5px 0px;
+	height: 45px;
+	padding: 10px;
+	margin: 5px 0px 10px;
 	color: white;
 	font-size: 25px;
-	border-radius: 5%;
+	border-radius: 15px;
 	font-family:system-ui;
 }
 
 .buttons {
-	display:flex;
-	flex-direction:row;
+	margin: 0;
 }
   
 .digits {
+	float: left;
 	display:flex;
-	flex-direction:row;
-	flex-wrap:wrap;
+	flex-wrap: wrap;
+	width: 75%;
 }
   
 .digit {
-	height:30px;
-	width:30px;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	margin: 10px 5px;
+	padding: 0;
+	font-size: 20px;
 	color:black;
-	border-radius: 25%;
 	background-color:rgb(222, 218, 217);
-	margin:4px;
 	font-family:system-ui;
-	font-size:20px;
 	box-shadow: 1px 1px 1px black;
 	cursor: pointer;
 	text-align: center;
-	padding: 0;
 }
 
 .digit:hover {
@@ -67,39 +179,49 @@ body {
 }  
 
 .options {
-	height:30px;
-	width:30px;
-	border-radius: 25%;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	margin: 10px 5px;
+	padding: 0;
+	font-size: 20px;
 	color:white;
 	background-color:#132;
-	margin:5px 0px 5px 5px;
 	font-family:serif;
-	font-size:20px;
 	box-shadow: 1px 1px 1px black;
 	cursor: pointer;
-	padding: 0;
 }
 
 .operators {
-	margin-left: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	float: right;
+	width: 25%;
 }
   
 .operator, #equals {
-	height:28px;
-	width:28px;
-	border-radius: 25%;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	margin: 4px 0px;
+	padding: 0;
+	font-size: 20px;
 	color:white;
 	background-color:orange;
-	margin:2px;
 	font-family:system-ui;
-	font-size:20px;
 	text-align:center;
 	box-shadow: 1px 1px 1px black;
 	cursor: pointer;
-	padding: 0;
+}
+
+#add {
+	margin-top: 10px;	
 }
 
 .options:hover, .operator:hover {
 	background-color:white;
 	color:black;
+}
 }
